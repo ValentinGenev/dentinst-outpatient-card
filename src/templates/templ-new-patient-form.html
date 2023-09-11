@@ -1,0 +1,101 @@
+<form id="new_patient_form" class="container my-4">
+  <header class="row">
+    <h2 class="col px-0">New patient</h2>
+  </header>
+
+  <fieldset class="row mb-2">
+    <input class="col me-2" type="text" name="name" placeholder="Name" required>
+    <input class="col me-2" type="text" name="middleName" placeholder="Middle name">
+    <input class="col" type="text" name="familyName" placeholder="Family name" required>
+  </fieldset>
+
+  <fieldset class="row mb-2">
+    <input class="col me-2" type="tel" name="phone" placeholder="Telephone">
+    <input class="col" type="text" name="egn" placeholder="EGN" required maxlength="10" minlength="10">
+  </fieldset>
+
+  <fieldset class="row mb-2">
+    <input class="col me-2" type="text" name="city" placeholder="City">
+    <input class="col" type="text" name="street" placeholder="Street">
+  </fieldset>
+
+  <fieldset class="row mb-2">
+    <input class="col me-2" type="text" name="occupation" placeholder="Occupation">
+    <input class="col" type="email" name="email" placeholder="Email">
+  </fieldset>
+
+  <div class="row mb-2">
+    <fieldset class="col border-start me-2">
+      <p class="mb-0">Allergies</p>
+      <label for="allergies1">Yes</label>
+      <input type="radio" id="allergies1" name="hasAllergies" value="1" required>
+      <label class="ms-2" for="allergies2">No</label>
+      <input type="radio" id="allergies2" name="hasAllergies" value="0" required>
+    </fieldset>
+
+    <fieldset class="col border-start">
+      <p class="mb-0">Smoker</p>
+      <label for="smoker1">Yes</label>
+      <input type="radio" id="smoker1" name="isSmoker" value="1">
+      <label class="ms-2" for="smoker2">No</label>
+      <input type="radio" id="smoker2" name="isSmoker" value="0">
+    </fieldset>
+  </div>
+
+  <div class='row justify-content-end'>
+    <input class="col-2" type="submit" value="Save">
+  </div>
+
+  <div class="spinner row align-items-center d-none">
+    <strong>Loading...</strong>
+    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+  </div>
+  
+  <div class='row mt-4'>
+    <div class="alert alert-danger d-none" role="alert" data-default-text="Something went wrong">Something went wrong</div>
+  </div>
+</form>
+
+<script>
+  ((w, d, g) => {
+    d.querySelector('#new_patient_form').addEventListener('submit', addNewPatient)
+
+    function addNewPatient(event) {
+      event.preventDefault()
+      clearAlerts()
+      toggleFormSpinner()
+
+      const formData = new FormData(event.target)
+      g.script.run.withSuccessHandler(handleSubmissionResponse)
+        .addPatient(Object.fromEntries(formData))
+    }
+
+    function handleSubmissionResponse(response) {
+      toggleFormSpinner()
+
+      if (response.error) {
+        const alert = d.querySelector('#new_patient_form .alert-danger')
+        alert.innerText = alert.dataset.defaultText
+        alert.innerText = response.error?.message ?
+          response.error?.message : alert.innerText
+        alert.classList.remove('d-none')
+      }
+      else {
+        storePatientId(response.patientId)
+      }
+    }
+
+    function storePatientId(id) {
+      w.sessionStorage.setItem('patientId', id)
+      w.dispatchEvent(new Event('storage'))
+    }
+
+    function clearAlerts() {
+      d.querySelectorAll('#new_patient_form .alert').forEach(a => a.classList.add('d-none'))
+    }
+    
+    function toggleFormSpinner() {
+      d.querySelector('#new_patient_form .spinner').classList.toggle('d-none')
+    }
+  })(window, document, google)
+</script>

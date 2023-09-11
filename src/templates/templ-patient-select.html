@@ -1,0 +1,67 @@
+<form id="previous_patients" class="container my-4">
+  <fieldset class="row mb-2">
+    <label class="col border-start me-2" for="patients">Choose a petient:</label>
+    <div id="spinner" class="spinner-border ms-auto d-none me-2" role="status" aria-hidden="true"></div>
+    <select class="col-6 py-1" name="patients" id="patients" disabled>
+      <option value="">Previous patients</option>
+    </select>
+  </fieldset>
+
+  <div class="row justify-content-end">
+    <input class="col-2" type="submit" value="Select" disabled>
+  </div>
+  
+  <div class="row mt-4">
+    <div class="alert alert-success d-none" role="alert">New patient added</div>
+    <div class="alert alert-danger d-none" role="alert">Something went wrong</div>
+  </div>
+</form>
+
+<script>
+  ((w, d, g) => {
+    g.script.run.withSuccessHandler(loadOldPetients).getAllPatients()
+    togglePpSpinner()
+
+    function loadOldPetients(data) {
+      const patientSelect = d.querySelector('#previous_patients #patients')
+      const patients = data.filter(p => p[0] !== 'name')
+
+      for (let patient of patients) {
+        patientSelect.appendChild(createPatientOption(patient))
+      }
+
+      patientSelect.disabled = !patients.length
+      togglePpSpinner()
+    }
+
+    function createPatientOption(patient) {
+      const [name, id] = patient
+      const newOption = d.createElement('option')
+      newOption.value = id
+      newOption.innerText = name
+      return newOption
+    }
+
+    d.querySelector('#patients').addEventListener('change', selectParient)
+
+    function selectParient() {
+      d.querySelector('#previous_patients input[type=submit]').disabled = false
+    }
+    
+    d.querySelector('#previous_patients').addEventListener('submit', handleSubmit)
+
+    function handleSubmit(event) {
+      event.preventDefault()
+      storePatientId(event.target.patients.value)
+    }
+
+    function storePatientId(id) {
+      w.sessionStorage.setItem('patientId', id)
+      w.dispatchEvent(new Event('storage'))
+    }
+
+    function togglePpSpinner() {
+      d.querySelector('#previous_patients #spinner').classList.toggle('d-none')
+    }
+  })(window, document, google)
+</script>

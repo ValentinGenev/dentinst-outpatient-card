@@ -1,1 +1,1 @@
-# dentinst-outpatient-card
+# dentist-outpatient-card

@@ -1,0 +1,138 @@
+<form id="medical_history_form" class="container my-4 d-none">
+  <header class="row">
+    <h2 class="col px-0">Medical history</h2>
+    <div class="spinner spinner-border ms-auto d-none" role="status" aria-hidden="true"></div>
+  </header>
+
+  <div class="row">
+    <div class="col row mb-2">
+      <fieldset class="border-start me-2 mb-2 if-checked-enable">
+        <p class="mb-0">1. Regular medication intake</p>
+        <label for="hasRegularMedicationIntake">Yes</label>
+        <input type="checkbox" id="hasRegularMedicationIntake" name="hasRegularMedicationIntake" value="1">
+
+        <textarea class="d-block w-100 me-2 px-3" name="regularMedications" placeholder="Medications" disabled="true"></textarea>
+      </fieldset>
+
+      <fieldset class="border-start me-2 mb-2 if-checked-enable">
+        <p class="mb-0">2. Allergy <small>(skin rash, hay fever, allergy to medications, cosmetics, foods, anaphylactic reaction)</small></p>
+        <label for="hasAllergies">Yes</label>
+        <input type="checkbox" id="hasAllergies" name="hasAllergies" value="1">
+
+        <textarea class="d-block w-100 me-2 px-3" name="allergies" id="allergies" placeholder="Allergies" disabled="true"></textarea>
+      </fieldset>
+
+      <fieldset class="border-start me-2 mb-2">
+        <p class="mb-0">3. Bronchial Asthma</p>
+        <label for="hasBronchialAsthma">Yes</label>
+        <input type="checkbox" id="hasBronchialAsthma" name="hasBronchialAsthma" value="1">
+      </fieldset>
+
+      <fieldset class="border-start me-2 mb-2">
+        <p class="mb-0">4. Aids</p>
+        <label for="hasAids">Yes</label>
+        <input type="checkbox" id="hasAids" name="hasAids" value="1">
+      </fieldset>
+
+      <fieldset class="border-start me-2 mb-2">
+        <p class="mb-0">5. Viral Hepatitis</p>
+        <label for="hasViralHepatitis">Yes</label>
+        <input type="checkbox" id="hasViralHepatitis" name="hasViralHepatitis" value="1">
+      </fieldset>
+
+      <fieldset class="border-start me-2 mb-2">
+        <p class="mb-0">6. Hemophilia</p>
+        <label for="hasHemophilia">Yes</label>
+        <input type="checkbox" id="hasHemophilia" name="hasHemophilia" value="1">
+      </fieldset>
+
+      <fieldset class="col border-start me-2">
+        <p class="mb-0">7. Use of drugs <small>(There are medications and medicinal products in routine dental practice that are incompatible with some drugs and may be dangerous to the patient's health)</small></p>
+        <label for="doesDrugs">Yes</label>
+        <input type="checkbox" id="doesDrugs" name="doesDrugs" value="1">
+      </fieldset>
+    </div>
+
+    <div class="col row mb-2">
+      <fieldset class="border-start me-2 mb-2">
+        <p class="mb-0">8. Leukemia</p>
+        <label for="hasLeukemia">Yes</label>
+        <input type="checkbox" id="hasLeukemia" name="hasLeukemia" value="1">
+      </fieldset>
+      
+      <fieldset class="border-start me-2 mb-2 if-checked-enable">
+        <p class="mb-0">9. High/low blood pressure</p>
+        <label for="hasAbnormalBloodPressure">Yes</label>
+        <input type="checkbox" id="hasAbnormalBloodPressure" name="hasAbnormalBloodPressure" value="1">
+
+        <input class="d-block w-100 px-3 mb-1" type="text" id="regularBloodPressureMeasures" name="regularBloodPressureMeasures" placeholder="Usual values" disabled="true">
+        <input class="d-block w-100 px-3" type="text" id="bloodPressureUntilIncident" name="bloodPressureUntilIncident" placeholder="Incident to" disabled="true">
+      </fieldset>
+
+      <fieldset class="border-start me-2 mb-2">
+        <p class="mb-0">10. Diseases of the cardiovascular system <small>(arrhythmia, previous heart attack, stroke)</small></p>
+        <label for="hasCardiovascularSystemDiseases">Yes</label>
+        <input type="checkbox" id="hasCardiovascularSystemDiseases" name="hasCardiovascularSystemDiseases" value="1">
+      </fieldset>
+
+      <fieldset class="border-start me-2 mb-2">
+        <p class="mb-0">11. Diabetes</p>
+        <label for="hasDiabetes">Yes</label>
+        <input type="checkbox" id="hasDiabetes" name="hasDiabetes" value="1">
+      </fieldset>
+
+      <fieldset class="border-start me-2 mb-2">
+        <p class="mb-0">11. Joint diseases/joint prostheses/arthritis</p>
+        <label for="hasJointDiseases">Yes</label>
+        <input type="checkbox" id="hasJointDiseases" name="hasJointDiseases" value="1">
+      </fieldset>
+
+      <fieldset class="border-start me-2 mb-2">
+        <p class="mb-0">12. Pregnancy/lactation</p>
+        <label for="isPregnant">Yes</label>
+        <input type="checkbox" id="isPregnant" name="isPregnant" value="1">
+      </fieldset>
+
+      <fieldset class="border-start me-2 mb-2 if-checked-enable">
+        <p class="mb-0">Other diseases:</p>
+        <label for="hasOtherDiseases">Yes</label>
+        <input type="checkbox" id="hasOtherDiseases" name="hasOtherDiseases" value="1">
+
+        <textarea class="d-block w-100 me-2 px-3" name="otherDiseases" id="otherDiseases" placeholder="Diseases" disabled="true"></textarea>
+      </fieldset>
+    </div>
+  </div>
+
+  <div class='row justify-content-end'>
+    <input class="col-2" type="submit" value="Save">
+  </div>
+
+  <div class="spinner row align-items-center d-none">
+    <strong>Loading...</strong>
+    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+  </div>
+  
+  <div class='row mt-4'>
+    <div class="alert alert-success d-none" role="alert">Medical history saved</div>
+    <div class="alert alert-danger d-none" role="alert" data-default-text="Something went wrong">Something went wrong</div>
+  </div>
+</form>
+
+<script>
+  ((w, d, g) => {
+    w.addEventListener('storage', loadMedicalHistory)
+
+    function loadMedicalHistory() {
+      console.log('todo')
+    }
+
+    d.querySelectorAll('.if-checked-enable').forEach(fs => {
+      const additionalInfoFields = fs.querySelectorAll('input[disabled], textarea[disabled]')
+      fs.querySelector('input[type=checkbox]').addEventListener('change', event => {
+        additionalInfoFields.forEach(f => f.disabled = !event.target.checked)
+      })
+    })
+
+    // TODO: add the save/edit logic
+  })(window, document, google)
+</script>
