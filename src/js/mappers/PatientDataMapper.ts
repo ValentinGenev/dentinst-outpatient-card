@@ -1,5 +1,7 @@
-class PatientDataMapper {
-  static mapDataToTable(id, data) {
+import { PatientDataDTO } from "../interfaces/PatientDataDTO"
+
+export class PatientDataMapper {
+  static mapDataToTable(id: string, data: PatientDataDTO) {
     const patientData = []
     patientData[PATIENTS_DATA_COLUMNS.patientId] = id
     patientData[PATIENTS_DATA_COLUMNS.name] = data.name
@@ -16,19 +18,19 @@ class PatientDataMapper {
     return patientData
   }
 
-  static mapDataToDTO(data) {
+  static mapDataToDTO(data: any[]): PatientDataDTO {
     return {
-      'name': data[PATIENTS_DATA_COLUMNS.name],
-      'middleName': data[PATIENTS_DATA_COLUMNS.middleName],
-      'familyName': data[PATIENTS_DATA_COLUMNS.familyName],
-      'phone': data[PATIENTS_DATA_COLUMNS.phone],
-      'egn': data[PATIENTS_DATA_COLUMNS.egn],
-      'city': data[PATIENTS_DATA_COLUMNS.city],
-      'street': data[PATIENTS_DATA_COLUMNS.street],
-      'occupation': data[PATIENTS_DATA_COLUMNS.occupation],
-      'email': data[PATIENTS_DATA_COLUMNS.email],
-      'hasAllergies': data[PATIENTS_DATA_COLUMNS.hasAllergies],
-      'isSmoker': data[PATIENTS_DATA_COLUMNS.isSmoker],
+      name: data[PATIENTS_DATA_COLUMNS.name],
+      middleName: data[PATIENTS_DATA_COLUMNS.middleName],
+      familyName: data[PATIENTS_DATA_COLUMNS.familyName],
+      phone: data[PATIENTS_DATA_COLUMNS.phone],
+      egn: data[PATIENTS_DATA_COLUMNS.egn],
+      city: data[PATIENTS_DATA_COLUMNS.city],
+      street: data[PATIENTS_DATA_COLUMNS.street],
+      occupation: data[PATIENTS_DATA_COLUMNS.occupation],
+      email: data[PATIENTS_DATA_COLUMNS.email],
+      hasAllergies: data[PATIENTS_DATA_COLUMNS.hasAllergies],
+      isSmoker: data[PATIENTS_DATA_COLUMNS.isSmoker],
     }
   }
 }

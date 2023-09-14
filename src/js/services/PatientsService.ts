@@ -1,16 +1,23 @@
-class PatientService {
-  static add(data) {
+import { PatientDataDTO } from "../interfaces/PatientDataDTO"
+import { PatientsDataRepository } from "../repositories/PatientsDataRepository"
+import { PatientsRepository } from "../repositories/PatientsRepository"
+
+// @ts-ignore
+const UTILITIES = Utilities
+
+export class PatientService {
+  static add(data: PatientDataDTO) {
     this.checkIfPatientExists(data)
     this.checkIfDataIsValid(data)
 
-    const patientId = Utilities.getUuid()
+    const patientId = UTILITIES.getUuid()
     PatientsRepository.add(patientId, data)
     PatientsDataRepository.add(patientId, data)
 
     return patientId
   }
 
-  static checkIfPatientExists(data) {
+  static checkIfPatientExists(data: PatientDataDTO) {
     const newPatientName = `${data.name} ${data.middleName} ${data.familyName}`
     const oldPatients = PatientsRepository.getAll()
 
@@ -19,7 +26,7 @@ class PatientService {
     }
   }
 
-  static edit(patientId, data) {
+  static edit(patientId: string, data: PatientDataDTO) {
     this.checkIfNameIsTaken(patientId, data)
     this.checkIfDataIsValid(data)
 
@@ -27,7 +34,7 @@ class PatientService {
     PatientsDataRepository.edit(patientId, data)
   }
 
-  static checkIfNameIsTaken(patientId, data) {
+  static checkIfNameIsTaken(patientId: string, data: PatientDataDTO) {
     const newName = `${data.name} ${data.middleName} ${data.familyName}`
     const oldPatients = PatientsRepository.getAll()
 
@@ -36,9 +43,9 @@ class PatientService {
     }
   }
 
-  static checkIfDataIsValid(data) {
+  static checkIfDataIsValid(data: PatientDataDTO) {
     const missingFields = []
-    
+
     if (!data.name) {
       missingFields.push('name')
     }

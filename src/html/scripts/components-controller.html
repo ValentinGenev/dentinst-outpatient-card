@@ -1,9 +1,8 @@
 <script>
   ((w, d) => {
-    w.addEventListener('storage', toggleUiIfPatient)
+    w.addEventListener('storage', toggleComponentsIfPatient)
 
-    function toggleUiIfPatient() {
-      console.log(checkIfHasPatient())
+    function toggleComponentsIfPatient() {
       if (!checkIfHasPatient()) {
         return
       }

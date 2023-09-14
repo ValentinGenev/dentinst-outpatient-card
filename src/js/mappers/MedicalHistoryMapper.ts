@@ -1,5 +1,7 @@
-class MedicalHistoryMapper {
-  static mapDataToTable(id, data) {
+import { MedicalHistoryDTO } from "../interfaces/MedicalHistoryDTO"
+
+export class MedicalHistoryMapper {
+  static mapDataToTable(id: string, data: MedicalHistoryDTO) {
     const medicalHistory = []
     medicalHistory[MEDICAL_HISTORY_COLUMNS.patientId] = id
     medicalHistory[MEDICAL_HISTORY_COLUMNS.hasRegularMedicationIntake] = data.hasRegularMedicationIntake
@@ -23,28 +25,27 @@ class MedicalHistoryMapper {
     return medicalHistory
   }
 
-  static mapDataToDTO(data) {
+  static mapDataToDTO(data: any[]): MedicalHistoryDTO {
     return {
-      'hasRegularMedicationIntake': data[MEDICAL_HISTORY_COLUMNS.hasRegularMedicationIntake],
-      'regularMedications': data[MEDICAL_HISTORY_COLUMNS.regularMedications],
-      'regularMedications': data[MEDICAL_HISTORY_COLUMNS.regularMedications],
-      'hasAllergies': data[MEDICAL_HISTORY_COLUMNS.hasAllergies],
-      'allergies': data[MEDICAL_HISTORY_COLUMNS.allergies],
-      'hasBronchialAsthma': data[MEDICAL_HISTORY_COLUMNS.hasBronchialAsthma],
-      'hasAids': data[MEDICAL_HISTORY_COLUMNS.hasAids],
-      'hasViralHepatitis': data[MEDICAL_HISTORY_COLUMNS.hasViralHepatitis],
-      'hasHemophilia': data[MEDICAL_HISTORY_COLUMNS.hasHemophilia],
-      'doesDrugs': data[MEDICAL_HISTORY_COLUMNS.doesDrugs],
-      'hasLeukemia': data[MEDICAL_HISTORY_COLUMNS.hasLeukemia],
-      'hasAbnormalBloodPressure': data[MEDICAL_HISTORY_COLUMNS.hasAbnormalBloodPressure],
-      'regularBloodPressureMeasures': data[MEDICAL_HISTORY_COLUMNS.regularBloodPressureMeasures],
-      'bloodPressureUntilIncident': data[MEDICAL_HISTORY_COLUMNS.bloodPressureUntilIncident],
-      'hasCardiovascularSystemDiseases': data[MEDICAL_HISTORY_COLUMNS.hasCardiovascularSystemDiseases],
-      'hasDiabetes': data[MEDICAL_HISTORY_COLUMNS.hasDiabetes],
-      'hasJointDiseases': data[MEDICAL_HISTORY_COLUMNS.hasJointDiseases],
-      'isPregnant': data[MEDICAL_HISTORY_COLUMNS.isPregnant],
-      'hasOtherDiseases': data[MEDICAL_HISTORY_COLUMNS.hasOtherDiseases],
-      'otherDiseases': data[MEDICAL_HISTORY_COLUMNS.otherDiseases]
+      hasRegularMedicationIntake: data[MEDICAL_HISTORY_COLUMNS.hasRegularMedicationIntake],
+      regularMedications: data[MEDICAL_HISTORY_COLUMNS.regularMedications],
+      hasAllergies: data[MEDICAL_HISTORY_COLUMNS.hasAllergies],
+      allergies: data[MEDICAL_HISTORY_COLUMNS.allergies],
+      hasBronchialAsthma: data[MEDICAL_HISTORY_COLUMNS.hasBronchialAsthma],
+      hasAids: data[MEDICAL_HISTORY_COLUMNS.hasAids],
+      hasViralHepatitis: data[MEDICAL_HISTORY_COLUMNS.hasViralHepatitis],
+      hasHemophilia: data[MEDICAL_HISTORY_COLUMNS.hasHemophilia],
+      doesDrugs: data[MEDICAL_HISTORY_COLUMNS.doesDrugs],
+      hasLeukemia: data[MEDICAL_HISTORY_COLUMNS.hasLeukemia],
+      hasAbnormalBloodPressure: data[MEDICAL_HISTORY_COLUMNS.hasAbnormalBloodPressure],
+      regularBloodPressureMeasures: data[MEDICAL_HISTORY_COLUMNS.regularBloodPressureMeasures],
+      bloodPressureUntilIncident: data[MEDICAL_HISTORY_COLUMNS.bloodPressureUntilIncident],
+      hasCardiovascularSystemDiseases: data[MEDICAL_HISTORY_COLUMNS.hasCardiovascularSystemDiseases],
+      hasDiabetes: data[MEDICAL_HISTORY_COLUMNS.hasDiabetes],
+      hasJointDiseases: data[MEDICAL_HISTORY_COLUMNS.hasJointDiseases],
+      isPregnant: data[MEDICAL_HISTORY_COLUMNS.isPregnant],
+      hasOtherDiseases: data[MEDICAL_HISTORY_COLUMNS.hasOtherDiseases],
+      otherDiseases: data[MEDICAL_HISTORY_COLUMNS.otherDiseases]
     }
   }
 }
