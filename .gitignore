@@ -1,5 +1,6 @@
 node_modules/
-artifacts/*
-!artifacts/.gitkeep
-build/*
-!build/.gitkeep
+artifacts/
+.clasp.json
+
+bin/.clasp.json
+bin/appsscript.json

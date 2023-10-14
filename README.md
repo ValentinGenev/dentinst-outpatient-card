@@ -1,5 +1,21 @@
-# google-app-script-template
+# dentist-outpatient-card
 
-TODO: store the map for the rebuilding
-TODO: write the build script
-TODO: write docs
+## Clasp usage
+
+Read more about Clasp's usage on the [official documentation](https://github.com/google/clasp)
+
+**Before starting to work make sure you're logged-in**
+```sh
+npx clasp login
+```
+
+**If you want to pull latest remote scripts use:**
+```sh
+npx clasp pull
+```
+
+**Push changes to Google:**
+```sh
+cd bin/
+npx clash push
+```

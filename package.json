@@ -1,12 +1,11 @@
 {
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node scripts/build.js",
-    "compile": "tsc && browserify artifacts/index.js -o artifacts/0_js.js"
+    "build": "tsc"
   },
   "devDependencies": {
-    "typescript": "^4.9.5",
-    "browserify": "^17.0.0"
+    "@google/clasp": "^2.4.2",
+    "@types/google-apps-script": "^1.0.72",
+    "typescript": "^4.9.5"
   },
   "name": "dentist-outpatient-card",
   "version": "1.0.0",
