@@ -5,7 +5,7 @@ function doGet() {
   return HtmlService.createHtmlOutput(template.evaluate().getContent())
 }
 
-function addPatient(data) {
+function addPatient(data: PatientData) {
   try {
     const patientId = PatientService.add(data)
     return { success: true, patientId }
@@ -22,13 +22,13 @@ function getAllPatients() {
   return patients
 }
 
-function getPatientById(id) {
+function getPatientById(id: string) {
   const patients = PatientsDataRepository.getById(id)
   Logger.log(`Patient with id: ${id} loaded`)
   return PatientDataMapper.mapDataToDTO(patients[0])
 }
 
-function editPatient(patientId, data) {
+function editPatient(patientId: string, data: PatientData) {
   try {
     PatientService.edit(patientId, data)
     return { success: true, patientId }
@@ -39,7 +39,7 @@ function editPatient(patientId, data) {
   }
 }
 
-function addMedicalHistory(patientId, data) {
+function addMedicalHistory(patientId: string, data: MedicalHistory) {
   try {
     MedicalHistoryService.add(patientId, data)
     return { success: true, patientId }
@@ -50,7 +50,7 @@ function addMedicalHistory(patientId, data) {
   }
 }
 
-function getMedicalHistory(id) {
+function getMedicalHistory(id: string) {
   const medicalHistory = MedicalHistoryRepository.getById(id)
   Logger.log(`Medical data for patent with id: ${id} loaded`)
   return MedicalHistoryMapper.mapSheetDataToDto(medicalHistory)

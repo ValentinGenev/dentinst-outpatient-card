@@ -1,5 +1,5 @@
 class MedicalHistoryService {
-  static add(patientId, data) {
+  static add(patientId: string, data: MedicalHistory) {
     MedicalHistoryRepository.add(patientId, data)
 
     return patientId

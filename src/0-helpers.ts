@@ -9,14 +9,6 @@ function formatDate(timestamp: Date) {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
 }
 
-/**
- * @param value '1' | null
- * @returns boolean
- */
-function parseCheckboxValueToBoolean(value: string) {
-  return Boolean(Number(value))
-}
-
 function loadTemplate(name: string) {
   return HtmlService.createHtmlOutputFromFile(name).getContent()
 }

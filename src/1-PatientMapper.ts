@@ -1,8 +1,14 @@
+interface Patient {
+  name: string,
+  middleName: string,
+  familyName: string
+}
+
 class PatientMapper {
-  static mapDataToTable(id, data) {
+  static mapDataToTable(id: string, data: Patient) {
     const patient = []
-    patient[PATIENTS_COLUMNS.id] = id
-    patient[PATIENTS_COLUMNS.name] = `${data.name} ${data.middleName} ${data.familyName}`
+    patient[PatientColumns.id] = id
+    patient[PatientColumns.name] = `${data.name} ${data.middleName} ${data.familyName}`
     return patient
   }
 }

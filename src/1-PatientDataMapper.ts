@@ -8,8 +8,8 @@ interface PatientData {
   street: string,
   occupation: string,
   email: string,
-  hasAllergies: boolean,
-  isSmoker: boolean
+  hasAllergies: string,
+  isSmoker: string
 }
 
 class PatientDataMapper {
@@ -41,8 +41,8 @@ class PatientDataMapper {
       'street': data[PatientDataColumns.street],
       'occupation': data[PatientDataColumns.occupation],
       'email': data[PatientDataColumns.email],
-      'hasAllergies': parseCheckboxValueToBoolean(data[PatientDataColumns.hasAllergies]),
-      'isSmoker': parseCheckboxValueToBoolean(data[PatientDataColumns.isSmoker]),
+      'hasAllergies': data[PatientDataColumns.hasAllergies],
+      'isSmoker': data[PatientDataColumns.isSmoker],
     }
   }
 }

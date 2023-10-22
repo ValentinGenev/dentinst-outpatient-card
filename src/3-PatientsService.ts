@@ -1,5 +1,5 @@
 class PatientService {
-  static add(data) {
+  static add(data: PatientData) {
     this.checkIfPatientExists(data)
     this.checkIfDataIsValid(data)
 
@@ -10,7 +10,7 @@ class PatientService {
     return patientId
   }
 
-  static checkIfPatientExists(data) {
+  static checkIfPatientExists(data: Patient) {
     const newPatientName = `${data.name} ${data.middleName} ${data.familyName}`
     const oldPatients = PatientsRepository.getAll()
 
@@ -19,7 +19,7 @@ class PatientService {
     }
   }
 
-  static edit(patientId, data) {
+  static edit(patientId: string, data: PatientData) {
     this.checkIfNameIsTaken(patientId, data)
     this.checkIfDataIsValid(data)
 
@@ -27,7 +27,7 @@ class PatientService {
     PatientsDataRepository.edit(patientId, data)
   }
 
-  static checkIfNameIsTaken(patientId, data) {
+  static checkIfNameIsTaken(patientId: string, data: Patient) {
     const newName = `${data.name} ${data.middleName} ${data.familyName}`
     const oldPatients = PatientsRepository.getAll()
 
@@ -36,7 +36,7 @@ class PatientService {
     }
   }
 
-  static checkIfDataIsValid(data) {
+  static checkIfDataIsValid(data: PatientData) {
     const missingFields = []
 
     if (!data.name) {

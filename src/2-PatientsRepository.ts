@@ -3,11 +3,11 @@ class PatientsRepository {
     return PATIENTS_SHEET.getDataRange().getValues()
   }
 
-  static add(id, data) {
+  static add(id: string, data: PatientData) {
     PATIENTS_SHEET.appendRow(PatientMapper.mapDataToTable(id, data))
   }
 
-  static edit(id, data) {
+  static edit(id: string, data: Patient) {
     const rowIndex = this.findRowIndexByPatientId(id)
     if (rowIndex === -1) {
       throw { code: 'NOT_FOUND', message: `Row with id: ${id} was not found.` }
@@ -16,16 +16,16 @@ class PatientsRepository {
     this.updateRow(rowIndex, PatientMapper.mapDataToTable(id, data))
   }
 
-  static updateRow(rowIndex, data) {
+  static updateRow(rowIndex: number, data: (string | boolean)[]) {
     const range = PATIENTS_SHEET.getRange(rowIndex + 1, 1, 1, data.length) // ranges start from 1?
     range.setValues([data])
   }
 
-  static findRowIndexByPatientId(patientId) {
+  static findRowIndexByPatientId(patientId: string) {
     const values = PATIENTS_SHEET.getDataRange().getValues()
-    
+
     for (let i = 0; i < values.length; i++) {
-      if (values[i][PATIENTS_COLUMNS.id] === patientId) {
+      if (values[i][PatientColumns.id] === patientId) {
         return i
       }
     }
