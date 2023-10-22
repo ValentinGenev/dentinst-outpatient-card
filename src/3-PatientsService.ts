@@ -38,7 +38,7 @@ class PatientService {
 
   static checkIfDataIsValid(data) {
     const missingFields = []
-    
+
     if (!data.name) {
       missingFields.push('name')
     }

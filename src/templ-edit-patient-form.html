@@ -51,7 +51,7 @@
     <strong>Loading...</strong>
     <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
   </div>
-  
+
   <div class='row mt-4'>
     <div class="alert alert-success d-none" role="alert">Patient data saved</div>
     <div class="alert alert-danger d-none" role="alert" data-default-text="Something went wrong">Something went wrong</div>
@@ -82,6 +82,8 @@
         const field = elements.namedItem(key)
         field && (field.value = value)
       }
+
+      // TODO: fix the boolean fields, or turn them to a checkbox
     }
 
     d.querySelector('#edit_patient_form').addEventListener('submit', editExistingPatient)
@@ -125,7 +127,7 @@
     function toggleHeaderSpinner() {
       d.querySelector('#edit_patient_form header .spinner').classList.toggle('d-none')
     }
-    
+
     function toggleFormSpinner() {
       d.querySelector('#edit_patient_form > .spinner').classList.toggle('d-none')
     }

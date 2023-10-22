@@ -53,5 +53,5 @@ function addMedicalHistory(patientId, data) {
 function getMedicalHistory(id) {
   const medicalHistory = MedicalHistoryRepository.getById(id)
   Logger.log(`Medical data for patent with id: ${id} loaded`)
-  return MedicalHistoryMapper.mapDataToDTO(medicalHistory)
+  return MedicalHistoryMapper.mapSheetDataToDto(medicalHistory)
 }

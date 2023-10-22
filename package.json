@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "tsc"
+    "push:watch": "clasp push --watch"
   },
   "devDependencies": {
     "@google/clasp": "^2.4.2",

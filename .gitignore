@@ -2,5 +2,4 @@ node_modules/
 artifacts/
 .clasp.json
 
-bin/.clasp.json
-bin/appsscript.json
+src/appsscript.json

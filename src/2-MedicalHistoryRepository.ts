@@ -4,7 +4,7 @@ class MedicalHistoryRepository {
   }
 
   static add(id, data) {
-    MEDICAL_HISTORY_SHEET.appendRow(MedicalHistoryMapper.mapDataToTable(id, data))
+    MEDICAL_HISTORY_SHEET.appendRow(MedicalHistoryMapper.mapDtoToSheetData(id, data))
   }
 
   static edit(id, data) {
@@ -13,7 +13,7 @@ class MedicalHistoryRepository {
       throw { code: 'NOT_FOUND', message: `Row with id: ${id} was not found.` }
     }
 
-    this.updateRow(rowIndex, MedicalHistoryMapper.mapDataToTable(id, data))
+    this.updateRow(rowIndex, MedicalHistoryMapper.mapDtoToSheetData(id, data))
   }
 
   static updateRow(rowIndex, data) {
@@ -23,7 +23,7 @@ class MedicalHistoryRepository {
 
   static findRowIndexByPatientId(patientId) {
     const values = MEDICAL_HISTORY_SHEET.getDataRange().getValues()
-    
+
     for (let i = 0; i < values.length; i++) {
       if (values[i][PATIENTS_DATA_COLUMNS.patientId] === patientId) {
         return i
