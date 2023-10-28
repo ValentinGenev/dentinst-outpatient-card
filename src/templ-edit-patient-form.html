@@ -60,6 +60,8 @@
 
 <script>
   ((w, d, g) => {
+    const FORM_ID = '#edit_patient_form'
+
     w.addEventListener('storage', loadPatientData)
 
     function loadPatientData() {
@@ -69,24 +71,22 @@
     }
 
     function handlePatientData(data) {
-      d.querySelector('#edit_patient_form').reset()
+      d.querySelector(`${FORM_ID}`).reset()
       populateForm(data)
       clearAlerts()
       toggleHeaderSpinner()
     }
 
     function populateForm(patientData) {
-      const { elements } = d.querySelector('#edit_patient_form')
+      const { elements } = d.querySelector(`${FORM_ID}`)
 
       for (const [key, value] of Object.entries(patientData)) {
         const field = elements.namedItem(key)
         field && (field.value = value)
       }
-
-      // TODO: change the yes/no radio inputs to a checkbox
     }
 
-    d.querySelector('#edit_patient_form').addEventListener('submit', editExistingPatient)
+    d.querySelector(`${FORM_ID}`).addEventListener('submit', editExistingPatient)
 
     function editExistingPatient() {
       event.preventDefault()
@@ -103,14 +103,14 @@
       toggleFormSpinner()
 
       if (response.error) {
-        const alert = d.querySelector('#edit_patient_form .alert-danger')
+        const alert = d.querySelector(`${FORM_ID} .alert-danger`)
         alert.innerText = alert.dataset.defaultText
         alert.innerText = response.error?.message ?
           response.error?.message : alert.innerText
         alert.classList.remove('d-none')
       }
       else {
-        d.querySelector('#edit_patient_form .alert-success').classList.remove('d-none')
+        d.querySelector(`${FORM_ID} .alert-success`).classList.remove('d-none')
         storePatientId(response.patientId)
       }
     }
@@ -121,15 +121,15 @@
     }
 
     function clearAlerts() {
-      d.querySelectorAll('#edit_patient_form .alert').forEach(a => a.classList.add('d-none'))
+      d.querySelectorAll(`${FORM_ID} .alert`).forEach(a => a.classList.add('d-none'))
     }
 
     function toggleHeaderSpinner() {
-      d.querySelector('#edit_patient_form header .spinner').classList.toggle('d-none')
+      d.querySelector(`${FORM_ID} header .spinner`).classList.toggle('d-none')
     }
 
     function toggleFormSpinner() {
-      d.querySelector('#edit_patient_form > .spinner').classList.toggle('d-none')
+      d.querySelector(`${FORM_ID} > .spinner`).classList.toggle('d-none')
     }
   })(window, document, google)
 </script>

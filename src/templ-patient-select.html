@@ -1,9 +1,9 @@
 <form id="previous_patients" class="container my-4">
   <fieldset class="row mb-2">
-    <label class="col border-start me-2" for="patients">Choose a petient:</label>
+    <label class="col border-start me-2" for="patients">Choose a patient:</label>
     <div id="spinner" class="spinner-border ms-auto d-none me-2" role="status" aria-hidden="true"></div>
     <select class="col-6 py-1" name="patients" id="patients" disabled>
-      <option value="">Previous patients</option>
+      <option value="0">New patients</option>
     </select>
   </fieldset>
 
@@ -19,6 +19,8 @@
 
 <script>
   ((w, d, g) => {
+    // TODO: when New Patient is selected switch back to the new patient form
+
     g.script.run.withSuccessHandler(loadOldPatients).getAllPatients()
     togglePpSpinner()
 

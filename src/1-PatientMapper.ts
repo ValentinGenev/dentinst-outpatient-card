@@ -1,6 +1,6 @@
 interface Patient {
   name: string,
-  middleName: string,
+  middleName?: string,
   familyName: string
 }
 

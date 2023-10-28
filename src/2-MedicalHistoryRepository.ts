@@ -3,14 +3,10 @@ class MedicalHistoryRepository {
     return findRowsByValue(MEDICAL_HISTORY_SHEET, id)
   }
 
-  static add(id: string, data: MedicalHistory) {
-    MEDICAL_HISTORY_SHEET.appendRow(MedicalHistoryMapper.mapDtoToSheetData(id, data))
-  }
-
   static edit(id: string, data: MedicalHistory) {
     const rowIndex = this.findRowIndexByPatientId(id)
     if (rowIndex === -1) {
-      throw { code: 'NOT_FOUND', message: `Row with id: ${id} was not found.` }
+      this.add(id, data)
     }
 
     this.updateRow(rowIndex, MedicalHistoryMapper.mapDtoToSheetData(id, data))
@@ -21,15 +17,19 @@ class MedicalHistoryRepository {
     range.setValues([data])
   }
 
-  static findRowIndexByPatientId(patientId: string) {
+  static findRowIndexByPatientId(id: string) {
     const values = MEDICAL_HISTORY_SHEET.getDataRange().getValues()
 
     for (let i = 0; i < values.length; i++) {
-      if (values[i][PatientDataColumns.patientId] === patientId) {
+      if (values[i][MedicalHistoryColumns.patientId] === id) {
         return i
       }
     }
 
     return -1
+  }
+
+  private static add(id: string, data: MedicalHistory) {
+    MEDICAL_HISTORY_SHEET.appendRow(MedicalHistoryMapper.mapDtoToSheetData(id, data))
   }
 }

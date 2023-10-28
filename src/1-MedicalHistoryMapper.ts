@@ -1,23 +1,23 @@
 interface MedicalHistory {
-  hasRegularMedicationIntake: string
-  regularMedications: string
-  hasAllergies: string
-  allergies: string
-  hasBronchialAsthma: string
-  hasAids: string
-  hasViralHepatitis: string
-  hasHemophilia: string
-  doesDrugs: string
-  hasLeukemia: string
-  hasAbnormalBloodPressure: string
-  regularBloodPressureMeasures: string
-  bloodPressureUntilIncident: string
-  hasCardiovascularSystemDiseases: string
-  hasDiabetes: string
-  hasJointDiseases: string
-  isPregnant: string
-  hasOtherDiseases: string
-  otherDiseases: string
+  hasRegularMedicationIntake?: string
+  regularMedications?: string
+  hasAllergies?: string
+  allergies?: string
+  hasBronchialAsthma?: string
+  hasAids?: string
+  hasViralHepatitis?: string
+  hasHemophilia?: string
+  doesDrugs?: string
+  hasLeukemia?: string
+  hasAbnormalBloodPressure?: string
+  regularBloodPressureMeasures?: string
+  bloodPressureUntilIncident?: string
+  hasCardiovascularSystemDiseases?: string
+  hasDiabetes?: string
+  hasJointDiseases?: string
+  isPregnant?: string
+  hasOtherDiseases?: string
+  otherDiseases?: string
 }
 
 class MedicalHistoryMapper {
@@ -46,7 +46,7 @@ class MedicalHistoryMapper {
     return medicalHistory
   }
 
-  static mapSheetDataToDto(data: any[]): MedicalHistory {
+  static mapDataToDto(data: string[]): MedicalHistory {
     return {
       hasRegularMedicationIntake: data[MedicalHistoryColumns.hasRegularMedicationIntake],
       regularMedications: data[MedicalHistoryColumns.regularMedications],

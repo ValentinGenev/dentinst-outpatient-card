@@ -1,9 +1,10 @@
 <script>
+  // TODO: move the message from the forms to central notifications
+
   ((w, d) => {
     w.addEventListener('storage', toggleUiIfPatient)
 
     function toggleUiIfPatient() {
-      console.log(checkIfHasPatient())
       if (!checkIfHasPatient()) {
         return
       }

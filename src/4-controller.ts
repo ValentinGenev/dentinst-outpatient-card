@@ -8,6 +8,7 @@ function doGet() {
 function addPatient(data: PatientData) {
   try {
     const patientId = PatientService.add(data)
+    Logger.log(`Patient with id: ${patientId} added`)
     return { success: true, patientId }
   }
   catch(error) {
@@ -23,14 +24,15 @@ function getAllPatients() {
 }
 
 function getPatientById(id: string) {
-  const patients = PatientsDataRepository.getById(id)
+  const patientRows = PatientsDataRepository.getById(id)
   Logger.log(`Patient with id: ${id} loaded`)
-  return PatientDataMapper.mapDataToDTO(patients[0])
+  return PatientDataMapper.mapDataToDTO(patientRows[0])
 }
 
 function editPatient(patientId: string, data: PatientData) {
   try {
     PatientService.edit(patientId, data)
+    Logger.log(`Patient with id: ${patientId} edited`)
     return { success: true, patientId }
   }
   catch(error) {
@@ -39,9 +41,10 @@ function editPatient(patientId: string, data: PatientData) {
   }
 }
 
-function addMedicalHistory(patientId: string, data: MedicalHistory) {
+function editMedicalHistory(patientId: string, data: MedicalHistory) {
   try {
-    MedicalHistoryService.add(patientId, data)
+    MedicalHistoryService.edit(patientId, data)
+    Logger.log(`Medical data for patent with id: ${patientId} edited`)
     return { success: true, patientId }
   }
   catch(error) {
@@ -50,8 +53,14 @@ function addMedicalHistory(patientId: string, data: MedicalHistory) {
   }
 }
 
-function getMedicalHistory(id: string) {
-  const medicalHistory = MedicalHistoryRepository.getById(id)
-  Logger.log(`Medical data for patent with id: ${id} loaded`)
-  return MedicalHistoryMapper.mapSheetDataToDto(medicalHistory)
+function getMedicalHistoryById(id: string) {
+  try {
+    const medicalHistoryRows = MedicalHistoryRepository.getById(id)
+    Logger.log(`Medical data for patent with id: ${id} loaded`)
+    return MedicalHistoryMapper.mapDataToDto(medicalHistoryRows[0])
+  }
+  catch(error) {
+    Logger.log(error)
+    return { success: false, error }
+  }
 }

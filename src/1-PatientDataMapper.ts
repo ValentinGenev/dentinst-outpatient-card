@@ -1,15 +1,15 @@
 interface PatientData {
   name: string,
-  middleName: string,
+  middleName?: string,
   familyName: string,
-  phone: string,
+  phone?: string,
   egn: string,
-  city: string,
-  street: string,
-  occupation: string,
-  email: string,
+  city?: string,
+  street?: string,
+  occupation?: string,
+  email?: string,
   hasAllergies: string,
-  isSmoker: string
+  isSmoker?: string
 }
 
 class PatientDataMapper {

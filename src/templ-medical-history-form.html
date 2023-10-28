@@ -54,13 +54,13 @@
     </div>
 
     <div class="col row mb-2">
-      <fieldset class="border-start me-2 mb-2">
+      <fieldset class="border-start mb-2">
         <p class="mb-0">8. Leukemia</p>
         <label for="hasLeukemia">Yes</label>
         <input type="checkbox" id="hasLeukemia" name="hasLeukemia" value="1">
       </fieldset>
-      
-      <fieldset class="border-start me-2 mb-2 if-checked-enable">
+
+      <fieldset class="border-start mb-2 if-checked-enable">
         <p class="mb-0">9. High/low blood pressure</p>
         <label for="hasAbnormalBloodPressure">Yes</label>
         <input type="checkbox" id="hasAbnormalBloodPressure" name="hasAbnormalBloodPressure" value="1">
@@ -69,36 +69,36 @@
         <input class="d-block w-100 px-3" type="text" id="bloodPressureUntilIncident" name="bloodPressureUntilIncident" placeholder="Incident to" disabled="true">
       </fieldset>
 
-      <fieldset class="border-start me-2 mb-2">
+      <fieldset class="border-start mb-2">
         <p class="mb-0">10. Diseases of the cardiovascular system <small>(arrhythmia, previous heart attack, stroke)</small></p>
         <label for="hasCardiovascularSystemDiseases">Yes</label>
         <input type="checkbox" id="hasCardiovascularSystemDiseases" name="hasCardiovascularSystemDiseases" value="1">
       </fieldset>
 
-      <fieldset class="border-start me-2 mb-2">
+      <fieldset class="border-start mb-2">
         <p class="mb-0">11. Diabetes</p>
         <label for="hasDiabetes">Yes</label>
         <input type="checkbox" id="hasDiabetes" name="hasDiabetes" value="1">
       </fieldset>
 
-      <fieldset class="border-start me-2 mb-2">
+      <fieldset class="border-start mb-2">
         <p class="mb-0">11. Joint diseases/joint prostheses/arthritis</p>
         <label for="hasJointDiseases">Yes</label>
         <input type="checkbox" id="hasJointDiseases" name="hasJointDiseases" value="1">
       </fieldset>
 
-      <fieldset class="border-start me-2 mb-2">
+      <fieldset class="border-start mb-2">
         <p class="mb-0">12. Pregnancy/lactation</p>
         <label for="isPregnant">Yes</label>
         <input type="checkbox" id="isPregnant" name="isPregnant" value="1">
       </fieldset>
 
-      <fieldset class="border-start me-2 mb-2 if-checked-enable">
+      <fieldset class="border-start mb-2 if-checked-enable">
         <p class="mb-0">Other diseases:</p>
         <label for="hasOtherDiseases">Yes</label>
         <input type="checkbox" id="hasOtherDiseases" name="hasOtherDiseases" value="1">
 
-        <textarea class="d-block w-100 me-2 px-3" name="otherDiseases" id="otherDiseases" placeholder="Diseases" disabled="true"></textarea>
+        <textarea class="d-block w-100 px-3" name="otherDiseases" id="otherDiseases" placeholder="Diseases" disabled="true"></textarea>
       </fieldset>
     </div>
   </div>
@@ -111,7 +111,7 @@
     <strong>Loading...</strong>
     <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
   </div>
-  
+
   <div class='row mt-4'>
     <div class="alert alert-success d-none" role="alert">Medical history saved</div>
     <div class="alert alert-danger d-none" role="alert" data-default-text="Something went wrong">Something went wrong</div>
@@ -120,10 +120,46 @@
 
 <script>
   ((w, d, g) => {
+    // TODO: disable submit button white loading data
+    // TODO: fix the right side alignment
+
+    const FORM_ID = '#medical_history_form'
+
     w.addEventListener('storage', loadMedicalHistory)
 
     function loadMedicalHistory() {
-      console.log('todo')
+      toggleHeaderSpinner()
+      const patientId = w.sessionStorage.getItem('patientId')
+      g.script.run.withSuccessHandler(handlePatientData).getMedicalHistoryById(patientId)
+    }
+
+    function handlePatientData(data) {
+      d.querySelector(`${FORM_ID}`).reset()
+      clearAlerts()
+      toggleHeaderSpinner()
+
+      if (!data.error) {
+        populateForm(data)
+      }
+    }
+
+    function populateForm(patientData) {
+      const { elements } = d.querySelector(`${FORM_ID}`)
+
+      for (const [key, value] of Object.entries(patientData)) {
+        const field = elements.namedItem(key)
+        if (field) {
+          updateField(field, value)
+        }
+      }
+    }
+
+    function updateField(field, value) {
+      if (value) {
+          field.value = value
+          field.checked = field.type === 'checkbox' ? true : null
+          field.dispatchEvent(new Event('change'))
+      }
     }
 
     d.querySelectorAll('.if-checked-enable').forEach(fs => {
@@ -133,6 +169,50 @@
       })
     })
 
-    // TODO: add the save/edit logic
+    d.querySelector(`${FORM_ID}`).addEventListener('submit', editMedicalHistory)
+
+    function editMedicalHistory(event) {
+      event.preventDefault()
+      clearAlerts()
+      toggleFormSpinner()
+
+      const formData = new FormData(event.target)
+      const patientId = w.sessionStorage.getItem('patientId')
+      g.script.run.withSuccessHandler(handleSubmissionResponse)
+        .editMedicalHistory(patientId, Object.fromEntries(formData))
+    }
+
+    function handleSubmissionResponse(response) {
+      toggleFormSpinner()
+
+      if (response.error) {
+        const alert = d.querySelector(`${FORM_ID} .alert-danger`)
+        alert.innerText = alert.dataset.defaultText
+        alert.innerText = response.error?.message ?
+          response.error?.message : alert.innerText
+        alert.classList.remove('d-none')
+      }
+      else {
+        d.querySelector(`${FORM_ID} .alert-success`).classList.remove('d-none')
+        storePatientId(response.patientId)
+      }
+    }
+
+    function storePatientId(id) {
+      w.sessionStorage.setItem('patientId', id)
+      w.dispatchEvent(new Event('storage'))
+    }
+
+    function clearAlerts() {
+      d.querySelectorAll(`${FORM_ID} .alert`).forEach(a => a.classList.add('d-none'))
+    }
+
+    function toggleHeaderSpinner() {
+      d.querySelector(`${FORM_ID} header .spinner`).classList.toggle('d-none')
+    }
+
+    function toggleFormSpinner() {
+      d.querySelector(`${FORM_ID} .spinner`).classList.toggle('d-none')
+    }
   })(window, document, google)
 </script>
