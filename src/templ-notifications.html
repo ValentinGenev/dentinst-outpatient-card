@@ -1,0 +1,10 @@
+<div class="row mt-4">
+  <div class="alert alert-success d-none" role="alert"></div>
+  <div class="alert alert-danger d-none" role="alert"></div>
+</div>
+
+<script>
+  function clearAlerts() {
+    d.querySelectorAll('.alert').forEach(a => a.classList.add('d-none'))
+  }
+</script>

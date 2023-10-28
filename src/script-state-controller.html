@@ -1,21 +1,27 @@
 <script>
-  // TODO: move the message from the forms to central notifications
-
   ((w, d) => {
     w.addEventListener('storage', toggleUiIfPatient)
 
     function toggleUiIfPatient() {
-      if (!checkIfHasPatient()) {
+      if (checkIfHasPatient()) {
+        d.querySelector('#edit_patient_form')?.classList.remove('d-none')
+        d.querySelector('#medical_history_form')?.classList.remove('d-none')
+        d.querySelector('#new_patient_form')?.classList.add('d-none')
         return
       }
 
-      d.querySelector('#edit_patient_form')?.classList.remove('d-none')
-      d.querySelector('#medical_history_form')?.classList.remove('d-none')
-      d.querySelector('#new_patient_form')?.classList.add('d-none')
-    }
-
-    function checkIfHasPatient() {
-      return Boolean(w.sessionStorage.getItem('patientId'))
+      d.querySelector('#new_patient_form')?.classList.remove('d-none')
+      d.querySelector('#edit_patient_form')?.classList.add('d-none')
+      d.querySelector('#medical_history_form')?.classList.add('d-none')
     }
   })(window, document)
+
+  function checkIfHasPatient() {
+    return Boolean(window.sessionStorage.getItem('patientId'))
+  }
+
+  function storePatientId(id) {
+    window.sessionStorage.setItem('patientId', id)
+    window.dispatchEvent(new Event('storage'))
+  }
 </script>

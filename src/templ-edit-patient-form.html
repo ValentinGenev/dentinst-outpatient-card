@@ -54,12 +54,15 @@
 
   <div class='row mt-4'>
     <div class="alert alert-success d-none" role="alert">Patient data saved</div>
-    <div class="alert alert-danger d-none" role="alert" data-default-text="Something went wrong">Something went wrong</div>
+    <div class="alert alert-danger d-none" role="alert">Something went wrong</div>
   </div>
 </form>
 
 <script>
   ((w, d, g) => {
+    // TODO: disable submit button white loading data
+    // TODO: fix the loading spinner and reset form
+
     const FORM_ID = '#edit_patient_form'
 
     w.addEventListener('storage', loadPatientData)
@@ -67,7 +70,10 @@
     function loadPatientData() {
       toggleHeaderSpinner()
       const patientId = w.sessionStorage.getItem('patientId')
-      g.script.run.withSuccessHandler(handlePatientData).getPatientById(patientId)
+
+      if (checkIfHasPatient()) {
+        g.script.run.withSuccessHandler(handlePatientData).getPatientById(patientId)
+      }
     }
 
     function handlePatientData(data) {
@@ -113,11 +119,6 @@
         d.querySelector(`${FORM_ID} .alert-success`).classList.remove('d-none')
         storePatientId(response.patientId)
       }
-    }
-
-    function storePatientId(id) {
-      w.sessionStorage.setItem('patientId', id)
-      w.dispatchEvent(new Event('storage'))
     }
 
     function clearAlerts() {

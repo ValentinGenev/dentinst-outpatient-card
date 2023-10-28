@@ -52,7 +52,7 @@
   </div>
 
   <div class='row mt-4'>
-    <div class="alert alert-danger d-none" role="alert" data-default-text="Something went wrong">Something went wrong</div>
+    <div class="alert alert-danger d-none" role="alert">Something went wrong</div>
   </div>
 </form>
 
@@ -85,11 +85,6 @@
       else {
         storePatientId(response.patientId)
       }
-    }
-
-    function storePatientId(id) {
-      w.sessionStorage.setItem('patientId', id)
-      w.dispatchEvent(new Event('storage'))
     }
 
     function clearAlerts() {

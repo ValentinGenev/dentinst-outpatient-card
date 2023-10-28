@@ -3,24 +3,17 @@
     <label class="col border-start me-2" for="patients">Choose a patient:</label>
     <div id="spinner" class="spinner-border ms-auto d-none me-2" role="status" aria-hidden="true"></div>
     <select class="col-6 py-1" name="patients" id="patients" disabled>
-      <option value="0">New patients</option>
+      <option value="">New patients</option>
     </select>
   </fieldset>
 
   <div class="row justify-content-end">
     <input class="col-2" type="submit" value="Select" disabled>
   </div>
-
-  <div class="row mt-4">
-    <div class="alert alert-success d-none" role="alert">New patient added</div>
-    <div class="alert alert-danger d-none" role="alert">Something went wrong</div>
-  </div>
 </form>
 
 <script>
   ((w, d, g) => {
-    // TODO: when New Patient is selected switch back to the new patient form
-
     g.script.run.withSuccessHandler(loadOldPatients).getAllPatients()
     togglePpSpinner()
 
@@ -55,11 +48,6 @@
     function handleSubmit(event) {
       event.preventDefault()
       storePatientId(event.target.patients.value)
-    }
-
-    function storePatientId(id) {
-      w.sessionStorage.setItem('patientId', id)
-      w.dispatchEvent(new Event('storage'))
     }
 
     function togglePpSpinner() {
