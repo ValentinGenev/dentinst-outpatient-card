@@ -1,10 +1,24 @@
-<div class="row mt-4">
+<div class="fixed-bottom container my-4">
   <div class="alert alert-success d-none" role="alert"></div>
   <div class="alert alert-danger d-none" role="alert"></div>
 </div>
 
 <script>
+  function showSuccessAlert(message) {
+    const alert = document.querySelector('.alert-success')
+    alert.innerText = message
+    alert.classList.remove('d-none')
+    setTimeout(() => alert.classList.add('d-none'), 3000)
+  }
+
+  function showDangerAlert(message) {
+    const alert = document.querySelector('.alert-danger')
+    alert.innerText = message
+    alert.classList.remove('d-none')
+    setTimeout(() => alert.classList.add('d-none'), 3000)
+  }
+
   function clearAlerts() {
-    d.querySelectorAll('.alert').forEach(a => a.classList.add('d-none'))
+    document.querySelectorAll('.alert').forEach(a => a.classList.add('d-none'))
   }
 </script>

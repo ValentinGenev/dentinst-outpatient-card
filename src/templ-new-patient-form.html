@@ -50,10 +50,6 @@
     <strong>Loading...</strong>
     <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
   </div>
-
-  <div class='row mt-4'>
-    <div class="alert alert-danger d-none" role="alert">Something went wrong</div>
-  </div>
 </form>
 
 <script>
@@ -76,19 +72,13 @@
       toggleFormSpinner()
 
       if (response.error) {
-        const alert = d.querySelector(`${FORM_ID} .alert-danger`)
-        alert.innerText = alert.dataset.defaultText
-        alert.innerText = response.error?.message ?
-          response.error?.message : alert.innerText
-        alert.classList.remove('d-none')
+        const error = response.error?.message ?
+          response.error?.message : 'Something went wrong'
+        showDangerAlert(error)
       }
       else {
         storePatientId(response.patientId)
       }
-    }
-
-    function clearAlerts() {
-      d.querySelectorAll(`${FORM_ID} .alert`).forEach(a => a.classList.add('d-none'))
     }
 
     function toggleFormSpinner() {

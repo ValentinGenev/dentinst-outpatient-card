@@ -51,36 +51,31 @@
     <strong>Loading...</strong>
     <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
   </div>
-
-  <div class='row mt-4'>
-    <div class="alert alert-success d-none" role="alert">Patient data saved</div>
-    <div class="alert alert-danger d-none" role="alert">Something went wrong</div>
-  </div>
 </form>
 
 <script>
   ((w, d, g) => {
-    // TODO: disable submit button white loading data
-    // TODO: fix the loading spinner and reset form
-
     const FORM_ID = '#edit_patient_form'
 
     w.addEventListener('storage', loadPatientData)
 
     function loadPatientData() {
-      toggleHeaderSpinner()
-      const patientId = w.sessionStorage.getItem('patientId')
-
       if (checkIfHasPatient()) {
+        toggleHeaderSpinner()
+        toggleSubmitButton()
+        d.querySelector(`${FORM_ID}`).reset()
+        const patientId = w.sessionStorage.getItem('patientId')
         g.script.run.withSuccessHandler(handlePatientData).getPatientById(patientId)
       }
     }
 
     function handlePatientData(data) {
-      d.querySelector(`${FORM_ID}`).reset()
-      populateForm(data)
-      clearAlerts()
       toggleHeaderSpinner()
+      toggleSubmitButton()
+
+      if (!data.error) {
+        populateForm(data)
+      }
     }
 
     function populateForm(patientData) {
@@ -109,20 +104,14 @@
       toggleFormSpinner()
 
       if (response.error) {
-        const alert = d.querySelector(`${FORM_ID} .alert-danger`)
-        alert.innerText = alert.dataset.defaultText
-        alert.innerText = response.error?.message ?
-          response.error?.message : alert.innerText
-        alert.classList.remove('d-none')
+        const error = response.error?.message ?
+          response.error?.message : 'Something went wrong'
+        showDangerAlert(error)
       }
       else {
-        d.querySelector(`${FORM_ID} .alert-success`).classList.remove('d-none')
+        showSuccessAlert('Patient data saved')
         storePatientId(response.patientId)
       }
-    }
-
-    function clearAlerts() {
-      d.querySelectorAll(`${FORM_ID} .alert`).forEach(a => a.classList.add('d-none'))
     }
 
     function toggleHeaderSpinner() {
@@ -131,6 +120,11 @@
 
     function toggleFormSpinner() {
       d.querySelector(`${FORM_ID} > .spinner`).classList.toggle('d-none')
+    }
+
+    function toggleSubmitButton() {
+      const submitButton = d.querySelector(`${FORM_ID} input[type=submit]`)
+      submitButton.disabled = !submitButton.disabled
     }
   })(window, document, google)
 </script>
