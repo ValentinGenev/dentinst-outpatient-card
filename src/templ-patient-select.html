@@ -15,7 +15,7 @@
 <script>
   ((w, d, g) => {
     g.script.run.withSuccessHandler(loadOldPatients).getAllPatients()
-    togglePpSpinner()
+    togglePatientSpinner()
 
     function loadOldPatients(data) {
       const patientSelect = d.querySelector('#previous_patients #patients')
@@ -26,9 +26,14 @@
       }
 
       patientSelect.disabled = !patients.length
-      togglePpSpinner()
+      togglePatientSpinner()
     }
 
+    /**
+     * Creates a new option element for the select element
+     * @param {[string, string]} patient - An array with the patient's name and ID
+     * @returns {HTMLOptionElement} - The new option element
+     */
     function createPatientOption(patient) {
       const [name, id] = patient
       const newOption = d.createElement('option')
@@ -47,10 +52,10 @@
 
     function handleSubmit(event) {
       event.preventDefault()
-      storePatientId(event.target.patients.value)
+      storePatientId(event.target.patients.value) // from src/script-state-controller.html
     }
 
-    function togglePpSpinner() {
+    function togglePatientSpinner() {
       d.querySelector('#previous_patients #spinner').classList.toggle('d-none')
     }
   })(window, document, google)

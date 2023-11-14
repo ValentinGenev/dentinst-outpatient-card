@@ -4,6 +4,10 @@
 </div>
 
 <script>
+  /**
+   * Shows a success alert with the given message.
+   * @param {string} message - The message to be shown.
+   */
   function showSuccessAlert(message) {
     const alert = document.querySelector('.alert-success')
     alert.innerText = message
@@ -11,6 +15,10 @@
     setTimeout(() => alert.classList.add('d-none'), 3000)
   }
 
+  /**
+   * Shows a danger alert with the given message
+   * @param {string} message - The message to show in the alert
+   */
   function showDangerAlert(message) {
     const alert = document.querySelector('.alert-danger')
     alert.innerText = message
@@ -18,6 +26,9 @@
     setTimeout(() => alert.classList.add('d-none'), 3000)
   }
 
+  /**
+   * Hides all alerts
+   */
   function clearAlerts() {
     document.querySelectorAll('.alert').forEach(a => a.classList.add('d-none'))
   }

@@ -1,4 +1,4 @@
-<script>
+<script  type="text/javascript">
   ((w, d) => {
     w.addEventListener('storage', toggleUiIfPatient)
 
@@ -16,10 +16,18 @@
     }
   })(window, document)
 
+  /**
+   * Checks if there is a patient's ID in the Session storage
+   * @returns {boolean} - True if there is a patient's ID in the Session storage
+   */
   function checkIfHasPatient() {
     return Boolean(window.sessionStorage.getItem('patientId'))
   }
 
+  /**
+   * Stores patient's ID in the Session storage
+   * @param {string} id - The patient's ID.
+   */
   function storePatientId(id) {
     window.sessionStorage.setItem('patientId', id)
     window.dispatchEvent(new Event('storage'))

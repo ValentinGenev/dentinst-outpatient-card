@@ -149,6 +149,11 @@
       }
     }
 
+    /**
+     * Updates the field's value and checked property
+     * @param {HTMLInputElement|HTMLTextAreaElement} field - The field to be updated
+     * @param {string} value - The new value
+     */
     function updateField(field, value) {
       if (value) {
         field.value = value
@@ -168,7 +173,7 @@
 
     function editMedicalHistory(event) {
       event.preventDefault()
-      clearAlerts()
+      clearAlerts() // from src/templ-notifications.html
       toggleFormSpinner()
 
       const formData = new FormData(event.target)
@@ -183,11 +188,11 @@
       if (response.error) {
         const error = response.error?.message ?
           response.error?.message : 'Something went wrong'
-        showDangerAlert(error)
+        showDangerAlert(error) // from src/templ-notifications.html
       }
       else {
-        showSuccessAlert('Medical history saved')
-        storePatientId(response.patientId)
+        showSuccessAlert('Medical history saved') // from src/templ-notifications.html
+        storePatientId(response.patientId) // from src/script-state-controller.html
       }
     }
 

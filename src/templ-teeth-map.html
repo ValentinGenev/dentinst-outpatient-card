@@ -239,7 +239,7 @@
 
     function updateToothMap() {
       event.preventDefault()
-      clearAlerts()
+      clearAlerts() // from src/templ-notifications.html
 
       const formData = new FormData(event.target)
       const toothMap = mapFormDataToTeethMap(Object.fromEntries(formData))
@@ -253,6 +253,11 @@
       //   .addPatient(Object.fromEntries(formData))
     }
 
+    /**
+     * Returns an object with the teeth data
+     * @param {FormData} data - The form data
+     * @returns {Record<string, string>} - An object with the teeth data
+     */
     function mapFormDataToTeethMap(data) {
       const teethIds = getTeethIdFromFormData(data)
       const teethData = {}
@@ -262,6 +267,11 @@
       return teethData
     }
 
+    /**
+     * Returns an array of teeth IDs from the form data
+     * @param {FormData} data - The form data
+     * @returns {Array<string>} - An array of teeth IDs
+     */
     function getTeethIdFromFormData(data) {
       const teethIds = []
 
@@ -274,6 +284,12 @@
       return teethIds
     }
 
+    /**
+     * Returns the tooth data from the form data
+     * @param {string} id - The tooth ID
+     * @param {FormData} data - The form data
+     * @returns {string | null} - The tooth data
+     */
     function getToothData(id, data) {
       const toothQuadrant = findToothQuadrant(id)
       const toothPosition = id[1]
