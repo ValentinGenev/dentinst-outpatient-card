@@ -1,0 +1,102 @@
+<script>
+  class TeethMapValidator {
+    /**
+     * @param {Document} document - The document object
+     * @param {string} toothPositionSelector - The selector of the tooth elements
+     */
+    constructor(document, toothPositionSelector) {
+      this.d = document
+      this.toothSelectClass = toothPositionSelector
+    }
+
+    /**
+     * Validates the teeth map
+     * @param {FormData} formData - The teeth map form data
+     */
+    validateTeethMap(formData) {
+      const data = Object.fromEntries(formData)
+      // TODO: check if any data at all
+      this.clearAllValidation()
+      this.validateTeethData(data)
+      this.validateTeethPositions(data)
+    }
+
+    /**
+     * Adds the invalid class to the teeth that don't have valid value or
+     * selected position
+     * @param {Record<string, string>} data - The teeth data
+     */
+    validateTeethData(data) {
+      for (const key in data) {
+        if (key.includes('q') && data[key]) {
+          // TODO: validate tooth data with regex
+          const isPositionSelected = checkIfPositionIsSelected(key)
+
+          if (!isPositionSelected) {
+            this.d.querySelector(`input[name=${key}]`).classList.add('invalid')
+          }
+        }
+      }
+    }
+
+    /**
+     * Checks if the tooth position is selected
+     * @param {string} key - The key of the form data
+     * @returns {boolean} - True if the position is selected, false otherwise
+     */
+    checkIfPositionIsSelected(key) {
+      const toothQuadrant = Number(key[1])
+      const toothIndex = key[key.length - 1]
+      const toothPositionSelects = this.d.querySelectorAll(
+        this.formatTSSelector(toothQuadrant, toothIndex) + ', ' +
+        this.formatTSSelector(toothQuadrant + 4, toothIndex))
+      let isPositionSelected = false
+
+      toothPositionSelects.forEach(tps => {
+        if (tps.classList.contains('selected')) isPositionSelected = true
+      })
+
+      return isPositionSelected
+    }
+
+    /**
+     * Adds the invalid class to the teeth that don't have a position
+     * @param {Record<string, string>} data - The teeth data
+     */
+    validateTeethPositions(data) {
+      for (const key in data) {
+        if (Number(key) && !this.hasTeethData(key, data)) {
+          this.d.querySelector(this.formatTSSelector(key))
+            .classList.add('invalid')
+        }
+      }
+    }
+
+    /**
+     * Checks if the tooth has data
+     * @param {string} position - The tooth position
+     * @param {Record<string, string>} data - The teeth data
+     * @returns {boolean} - True if the tooth has data, false otherwise
+     */
+    hasTeethData(position, data) {
+      const quadrant = Number(position[1]) <= 4 ?
+        Number(position[1]) : Number(position[1]) - 4
+
+      return Boolean(data[`q${quadrant}-${position[2]}`]) ||
+        Boolean(data[`q${quadrant + 4}-${position[2]}`])
+    }
+
+    clearAllValidation() {
+      this.d.querySelectorAll('.invalid')
+        .forEach(el => el.classList.remove('invalid'))
+    }
+
+    isTeethMapValid() {
+      return this.d.querySelectorAll('.invalid').length === 0
+    }
+
+    formatTSSelector(...args) {
+      return this.toothSelectClass.replace('%s', args.join(''))
+    }
+  }
+</script>
