@@ -1,4 +1,7 @@
-class MedicalHistoryRepository {
+import { Sheet } from "../google/Sheet"
+import { MedicalHistory, MedicalHistoryMapper } from "../mappers/MedicalHistoryMapper"
+
+export class MedicalHistoryRepository {
   private sheet: Sheet
   private mapper: MedicalHistoryMapper
 

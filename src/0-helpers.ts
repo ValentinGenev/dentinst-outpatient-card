@@ -12,19 +12,3 @@ function formatDate(timestamp: Date) {
 function loadTemplate(name: string) {
   return HtmlService.createHtmlOutputFromFile(name).getContent()
 }
-
-function findRowsByValue(sheet: GoogleAppsScript.Spreadsheet.Sheet, value: any) {
-  const textFinder = sheet.createTextFinder(value)
-  const matches = textFinder.findAll()
-
-  const matchingRows = [];
-  for (let i = 0; i < matches.length; i++) {
-    const row = matches[i].getRow()
-    const range = sheet.getRange(row, 1, 1, sheet.getLastColumn())
-    const values = range.getValues()
-
-    matchingRows.push(values[0])
-  }
-
-  return matchingRows
-}

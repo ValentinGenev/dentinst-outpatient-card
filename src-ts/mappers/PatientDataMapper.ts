@@ -13,7 +13,7 @@ enum PatientDataColumns {
   isSmoker = 11
 }
 
-interface PatientData {
+export interface PatientData {
   name: string,
   middleName?: string,
   familyName: string,
@@ -27,7 +27,7 @@ interface PatientData {
   isSmoker?: string
 }
 
-class PatientDataMapper {
+export class PatientDataMapper {
   mapDataToTable(id: string, data: PatientData) {
     const patientData: any[] = []
     patientData[PatientDataColumns.patientId] = id

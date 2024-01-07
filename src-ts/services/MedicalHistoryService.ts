@@ -1,4 +1,7 @@
-class MedicalHistoryService {
+import { MedicalHistory, MedicalHistoryMapper } from "../mappers/MedicalHistoryMapper"
+import { MedicalHistoryRepository } from "../repositories/MedicalHistoryRepository"
+
+export class MedicalHistoryService {
   // TODO: every submissions should have version
 
   private repository: MedicalHistoryRepository

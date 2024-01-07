@@ -1,21 +1,24 @@
-class PatientsRepository {
-  private sheet: Sheet
-  private mapper: PatientMapper
+import { Sheet } from "../google/Sheet"
+import { PatientData, PatientDataMapper } from "../mappers/PatientDataMapper"
 
-  constructor(sheet: Sheet, mapper: PatientMapper) {
+export class PatientsDataRepository {
+  private sheet: Sheet
+  private mapper: PatientDataMapper
+
+  constructor(sheet: Sheet, mapper: PatientDataMapper) {
     this.sheet = sheet
     this.mapper = mapper
   }
 
-  getAll() {
-    return this.sheet.findAllRows()
+  getById(id: string) {
+    return this.sheet.findRowsByValue(id)
   }
 
   add(id: string, data: PatientData) {
     this.sheet.add(this.mapper.mapDataToTable(id, data))
   }
 
-  edit(id: string, data: Patient) {
+  edit(id: string, data: PatientData) {
     const rowIndex = this.sheet.findRowIndexByUUID(id)
     if (rowIndex === -1) {
       throw { code: 'NOT_FOUND', message: `Row with id: ${id} was not found.` }

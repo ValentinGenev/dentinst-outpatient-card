@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "system",
+    "noImplicitAny": true,
+    "outFile": "./bin/index.js",
+    "sourceMap": false
+  },
+  "include": ["./src-ts/**/*"]
+}

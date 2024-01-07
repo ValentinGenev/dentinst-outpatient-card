@@ -1,4 +1,9 @@
-class PatientsService {
+import { PatientData } from "../mappers/PatientDataMapper"
+import { Patient } from "../mappers/PatientMapper"
+import { PatientsDataRepository } from "../repositories/PatientsDataRepository"
+import { PatientsRepository } from "../repositories/PatientsRepository"
+
+export class PatientsService {
   private patientsRepository: PatientsRepository
   private dataRepository: PatientsDataRepository
 

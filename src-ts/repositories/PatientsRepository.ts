@@ -1,4 +1,8 @@
-class PatientsRepository {
+import { Sheet } from "../google/Sheet"
+import { PatientData } from "../mappers/PatientDataMapper"
+import { Patient, PatientMapper } from "../mappers/PatientMapper"
+
+export class PatientsRepository {
   private sheet: Sheet
   private mapper: PatientMapper
 

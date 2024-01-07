@@ -3,13 +3,13 @@ enum PatientColumns {
   id = 1
 }
 
-interface Patient {
+export interface Patient {
   name: string,
   middleName?: string,
   familyName: string
 }
 
-class PatientMapper {
+export class PatientMapper {
   mapDataToTable(id: string, data: Patient) {
     const patient: any[] = []
     patient[PatientColumns.id] = id

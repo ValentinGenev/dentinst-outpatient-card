@@ -21,7 +21,7 @@ enum MedicalHistoryColumns {
   otherDiseases = 19
 }
 
-interface MedicalHistory {
+export interface MedicalHistory {
   hasRegularMedicationIntake?: string
   regularMedications?: string
   hasAllergies?: string
@@ -43,7 +43,7 @@ interface MedicalHistory {
   otherDiseases?: string
 }
 
-class MedicalHistoryMapper {
+export class MedicalHistoryMapper {
   mapDtoToSheetData(id: string, data: MedicalHistory) {
     const medicalHistory: any[] = []
     medicalHistory[MedicalHistoryColumns.patientId] = id

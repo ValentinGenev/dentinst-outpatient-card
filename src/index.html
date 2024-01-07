@@ -9,13 +9,13 @@
   <body class="container">
     <h1>Outpatient Card</h1>
 
-    <?!= loadTemplate('class-teeth-map-validator') ?>
-    <?!= loadTemplate('templ-notifications') ?>
-    <?!= loadTemplate('templ-patient-select') ?>
-    <?!= loadTemplate('templ-new-patient-form') ?>
-    <?!= loadTemplate('templ-edit-patient-form') ?>
-    <?!= loadTemplate('templ-teeth-map') ?>
-    <?!= loadTemplate('templ-medical-history-form') ?>
-    <?!= loadTemplate('script-state-controller') ?>
+    <?!= HtmlService.createHtmlOutputFromFile('class-teeth-map-validator').getContent() ?>
+    <?!= HtmlService.createHtmlOutputFromFile('templ-notifications').getContent() ?>
+    <?!= HtmlService.createHtmlOutputFromFile('templ-patient-select').getContent() ?>
+    <?!= HtmlService.createHtmlOutputFromFile('templ-new-patient-form').getContent() ?>
+    <?!= HtmlService.createHtmlOutputFromFile('templ-edit-patient-form').getContent() ?>
+    <?!= HtmlService.createHtmlOutputFromFile('templ-teeth-map').getContent() ?>
+    <?!= HtmlService.createHtmlOutputFromFile('templ-medical-history-form').getContent() ?>
+    <?!= HtmlService.createHtmlOutputFromFile('script-state-controller').getContent() ?>
   </body>
 </html>
