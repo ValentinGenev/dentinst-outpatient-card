@@ -60,7 +60,7 @@
 
     function addNewPatient(event) {
       event.preventDefault()
-      clearAlerts() // from src/templ-notifications.html
+      clearAlerts() // from notifications.html
       toggleFormSpinner()
 
       const formData = new FormData(event.target)
@@ -74,10 +74,10 @@
       if (response.error) {
         const error = response.error?.message ?
           response.error?.message : 'Something went wrong'
-        showDangerAlert(error) // from src/templ-notifications.html
+        showDangerAlert(error) // from notifications.html
       }
       else {
-        storePatientId(response.patientId) // from src/script-state-controller.html
+        storePatientId(response.patientId) // from scripts/state-controller.html
       }
     }
 

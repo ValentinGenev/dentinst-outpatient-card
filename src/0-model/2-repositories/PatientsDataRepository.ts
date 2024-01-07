@@ -1,4 +1,4 @@
-import { Sheet } from "../google/Sheet"
+import { Sheet } from "../database/Sheet"
 import { PatientData, PatientDataMapper } from "../mappers/PatientDataMapper"
 
 export class PatientsDataRepository {

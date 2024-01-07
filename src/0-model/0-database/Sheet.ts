@@ -1,3 +1,5 @@
+import { Spreadsheet } from "./Spreadsheet"
+
 /**
  * Sheet
  * Wraps the GoogleAppsScript.Spreadsheet.Sheet class
@@ -7,7 +9,7 @@
  * @method {number} findRowIndexByUUID
  * @method {any[]} findRowsByValue
  */
-class Sheet {
+export class Sheet {
   private sheet: GoogleAppsScript.Spreadsheet.Sheet
 
   constructor(spreadSheet: Spreadsheet, sheetName: string) {

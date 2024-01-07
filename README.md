@@ -1,5 +1,8 @@
 # dentist-outpatient-card
 
+**MAKE SURE that you keep the directories ordered since it's the main way to**<br>
+**handle declaration order...**
+
 ## Clasp usage
 
 Read more about Clasp's usage on the [official documentation](https://github.com/google/clasp)

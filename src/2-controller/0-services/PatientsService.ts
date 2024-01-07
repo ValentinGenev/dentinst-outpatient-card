@@ -1,11 +1,27 @@
-class PatientsService {
+import { PatientData, PatientDataMapper } from "../../0-model/1-mappers/PatientDataMapper"
+import { Patient } from "../../0-model/1-mappers/PatientMapper"
+import { PatientsDataRepository } from "../../0-model/2-repositories/PatientsDataRepository"
+import { PatientsRepository } from "../../0-model/2-repositories/PatientsRepository"
+
+export class PatientsService {
   private patientsRepository: PatientsRepository
   private dataRepository: PatientsDataRepository
+  private dataMapper: PatientDataMapper
 
   constructor(patientsRepository: PatientsRepository,
-      dataRepository: PatientsDataRepository) {
+      dataRepository: PatientsDataRepository, dataMapper: PatientDataMapper) {
     this.patientsRepository = patientsRepository
     this.dataRepository = dataRepository
+    this.dataMapper = dataMapper
+  }
+
+  getAll() {
+    return this.patientsRepository.getAll()
+  }
+
+  getDataById(id: string) {
+    const data = this.dataRepository.getById(id)
+    return this.dataMapper.mapDataToDTO(data[0])
   }
 
   add(data: PatientData) {

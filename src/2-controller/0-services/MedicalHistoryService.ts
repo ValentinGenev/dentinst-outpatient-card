@@ -1,5 +1,5 @@
-import { MedicalHistory, MedicalHistoryMapper } from "../mappers/MedicalHistoryMapper"
-import { MedicalHistoryRepository } from "../repositories/MedicalHistoryRepository"
+import { MedicalHistory, MedicalHistoryMapper } from "../../0-model/1-mappers/MedicalHistoryMapper"
+import { MedicalHistoryRepository } from "../../0-model/2-repositories/MedicalHistoryRepository"
 
 export class MedicalHistoryService {
   // TODO: every submissions should have version

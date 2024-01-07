@@ -173,7 +173,7 @@
 
     function editMedicalHistory(event) {
       event.preventDefault()
-      clearAlerts() // from src/templ-notifications.html
+      clearAlerts() // from notifications.html
       toggleFormSpinner()
 
       const formData = new FormData(event.target)
@@ -188,11 +188,11 @@
       if (response.error) {
         const error = response.error?.message ?
           response.error?.message : 'Something went wrong'
-        showDangerAlert(error) // from src/templ-notifications.html
+        showDangerAlert(error) // from notifications.html
       }
       else {
-        showSuccessAlert('Medical history saved') // from src/templ-notifications.html
-        storePatientId(response.patientId) // from src/script-state-controller.html
+        showSuccessAlert('Medical history saved') // from notifications.html
+        storePatientId(response.patientId) // from ../scripts/state-controller.html
       }
     }
 

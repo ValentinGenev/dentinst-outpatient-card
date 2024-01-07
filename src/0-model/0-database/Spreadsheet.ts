@@ -5,7 +5,7 @@
  * @property {GoogleAppsScript.Spreadsheet.Spreadsheet} spreadsheet
  * @method {GoogleAppsScript.Spreadsheet.Sheet} getSheet
  */
-class Spreadsheet {
+export class Spreadsheet {
   private properties: GoogleAppsScript.Properties.Properties
   private spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet
 
