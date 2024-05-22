@@ -1,3 +1,5 @@
+import { Mapper } from "./IMapper"
+
 enum MedicalHistoryColumns {
   patientId = 0,
   hasRegularMedicationIntake = 1,
@@ -43,7 +45,7 @@ export interface MedicalHistory {
   otherDiseases?: string
 }
 
-export class MedicalHistoryMapper {
+export class MedicalHistoryMapper implements Mapper {
   mapDtoToSheetData(id: string, data: MedicalHistory) {
     const medicalHistory: any[] = []
     medicalHistory[MedicalHistoryColumns.patientId] = id

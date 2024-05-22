@@ -1,12 +1,13 @@
-import { Sheet } from "../database/Sheet"
-import { PatientData } from "../mappers/PatientDataMapper"
-import { Patient, PatientMapper } from "../mappers/PatientMapper"
+import { Sheet } from "../0-database/Sheet"
+import { Mapper } from "../1-mappers/IMapper"
+import { PatientData } from "../1-mappers/PatientDataMapper"
+import { Patient } from "../1-mappers/PatientMapper"
 
 export class PatientsRepository {
   private sheet: Sheet
-  private mapper: PatientMapper
+  private mapper: Mapper
 
-  constructor(sheet: Sheet, mapper: PatientMapper) {
+  constructor(sheet: Sheet, mapper: Mapper) {
     this.sheet = sheet
     this.mapper = mapper
   }
@@ -16,7 +17,7 @@ export class PatientsRepository {
   }
 
   add(id: string, data: PatientData) {
-    this.sheet.add(this.mapper.mapDataToTable(id, data))
+    this.sheet.add(this.mapper.mapDtoToSheetData(id, data))
   }
 
   edit(id: string, data: Patient) {
@@ -25,6 +26,6 @@ export class PatientsRepository {
       throw { code: 'NOT_FOUND', message: `Row with id: ${id} was not found.` }
     }
 
-    this.sheet.updateRow(rowIndex, this.mapper.mapDataToTable(id, data))
+    this.sheet.updateRow(rowIndex, this.mapper.mapDtoToSheetData(id, data))
   }
 }

@@ -1,11 +1,12 @@
 import { Sheet } from "../0-database/Sheet"
-import { MedicalHistory, MedicalHistoryMapper } from "../1-mappers/MedicalHistoryMapper"
+import { Mapper } from "../1-mappers/IMapper"
+import { MedicalHistory } from "../1-mappers/MedicalHistoryMapper"
 
 export class MedicalHistoryRepository {
   private sheet: Sheet
-  private mapper: MedicalHistoryMapper
+  private mapper: Mapper
 
-  constructor(sheet: Sheet, mapper: MedicalHistoryMapper) {
+  constructor(sheet: Sheet, mapper: Mapper) {
     this.sheet = sheet
     this.mapper = mapper
   }

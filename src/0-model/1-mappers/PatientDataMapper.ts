@@ -1,3 +1,5 @@
+import { Mapper } from "./IMapper"
+
 enum PatientDataColumns {
   patientId = 0,
   name = 1,
@@ -27,8 +29,8 @@ export interface PatientData {
   isSmoker?: string
 }
 
-export class PatientDataMapper {
-  mapDataToTable(id: string, data: PatientData) {
+export class PatientDataMapper implements Mapper {
+  mapDtoToSheetData(id: string, data: PatientData) {
     const patientData: any[] = []
     patientData[PatientDataColumns.patientId] = id
     patientData[PatientDataColumns.name] = data.name
@@ -45,7 +47,7 @@ export class PatientDataMapper {
     return patientData
   }
 
-  mapDataToDTO(data: string[]): PatientData {
+  mapDataToDto(data: string[]): PatientData {
     return {
       'name': data[PatientDataColumns.name],
       'middleName': data[PatientDataColumns.middleName],

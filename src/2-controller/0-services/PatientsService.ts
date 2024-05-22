@@ -1,3 +1,4 @@
+import { Mapper } from "../../0-model/1-mappers/IMapper"
 import { PatientData, PatientDataMapper } from "../../0-model/1-mappers/PatientDataMapper"
 import { Patient } from "../../0-model/1-mappers/PatientMapper"
 import { PatientsDataRepository } from "../../0-model/2-repositories/PatientsDataRepository"
@@ -6,10 +7,10 @@ import { PatientsRepository } from "../../0-model/2-repositories/PatientsReposit
 export class PatientsService {
   private patientsRepository: PatientsRepository
   private dataRepository: PatientsDataRepository
-  private dataMapper: PatientDataMapper
+  private dataMapper: Mapper
 
   constructor(patientsRepository: PatientsRepository,
-      dataRepository: PatientsDataRepository, dataMapper: PatientDataMapper) {
+      dataRepository: PatientsDataRepository, dataMapper: Mapper) {
     this.patientsRepository = patientsRepository
     this.dataRepository = dataRepository
     this.dataMapper = dataMapper
@@ -21,7 +22,7 @@ export class PatientsService {
 
   getDataById(id: string) {
     const data = this.dataRepository.getById(id)
-    return this.dataMapper.mapDataToDTO(data[0])
+    return this.dataMapper.mapDataToDto(data[0])
   }
 
   add(data: PatientData) {
