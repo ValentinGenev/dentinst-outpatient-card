@@ -2,18 +2,15 @@ import { Sheet } from "../0-database/Sheet"
 import { Mapper } from "../1-mappers/IMapper"
 import { PatientData } from "../1-mappers/PatientDataMapper"
 import { Patient } from "../1-mappers/PatientMapper"
+import { Repository } from "./IRepository"
 
-export class PatientsRepository {
+export class PatientsRepository implements Repository {
   private sheet: Sheet
   private mapper: Mapper
 
   constructor(sheet: Sheet, mapper: Mapper) {
     this.sheet = sheet
     this.mapper = mapper
-  }
-
-  getAll() {
-    return this.sheet.findAllRows()
   }
 
   add(id: string, data: PatientData) {
@@ -27,5 +24,9 @@ export class PatientsRepository {
     }
 
     this.sheet.updateRow(rowIndex, this.mapper.mapDtoToSheetData(id, data))
+  }
+
+  getAll() {
+    return this.sheet.findAllRows()
   }
 }
