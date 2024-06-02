@@ -1,14 +1,14 @@
-import { Mapper } from "../../0-model/1-mappers/IMapper"
+import { IMapper } from "../0-interfaces/IMapper"
 import { MedicalHistory } from "../../0-model/1-mappers/MedicalHistoryMapper"
-import { Repository } from "../../0-model/2-repositories/IRepository"
+import { Repository } from "../0-interfaces/IRepository"
 
 export class MedicalHistoryService {
   // TODO: every submissions should have version
 
   private repository: Repository
-  private mapper: Mapper
+  private mapper: IMapper
 
-  constructor(repository: Repository, mapper: Mapper) {
+  constructor(repository: Repository, mapper: IMapper) {
     this.repository = repository
     this.mapper = mapper
   }

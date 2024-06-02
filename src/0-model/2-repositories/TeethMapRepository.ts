@@ -1,12 +1,12 @@
-import { Sheet } from "../0-database/Sheet";
-import { Mapper } from "../1-mappers/IMapper";
-import { Repository } from "./IRepository";
+import { ISheet } from "../0-interfaces/ISheet";
+import { IMapper } from "../0-interfaces/IMapper";
+import { Repository } from "../0-interfaces/IRepository";
 
 export class TeethMapRepository implements Repository {
-    private sheet: Sheet;
-    private mapper: Mapper;
+    private sheet: ISheet;
+    private mapper: IMapper;
 
-    constructor(sheet: Sheet, mapper: Mapper) {
+    constructor(sheet: ISheet, mapper: IMapper) {
         this.sheet = sheet
         this.mapper = mapper
     }
@@ -17,7 +17,7 @@ export class TeethMapRepository implements Repository {
 
     edit(id: string, data: any) {  // TODO: define the TeethMap type and use it for the data
         const rowIndex = this.sheet.findRowIndexByUUID(id)
-        
+
         if (rowIndex === -1) {
           this.add(id, data)
         }

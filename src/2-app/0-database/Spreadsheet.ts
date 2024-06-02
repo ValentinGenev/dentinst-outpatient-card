@@ -1,11 +1,6 @@
-/**
- * Spreadsheet
- * Wraps the GoogleAppsScript.Spreadsheet.Spreadsheet class
- * @property {GoogleAppsScript.Properties.Properties} properties
- * @property {GoogleAppsScript.Spreadsheet.Spreadsheet} spreadsheet
- * @method {GoogleAppsScript.Spreadsheet.Sheet} getSheet
- */
-export class Spreadsheet {
+import { ISpreadsheet } from "../../0-model/0-interfaces/ISpreadsheet"
+
+export class Spreadsheet implements ISpreadsheet {
   private properties: GoogleAppsScript.Properties.Properties
   private spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet
 

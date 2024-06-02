@@ -1,18 +1,10 @@
-import { Spreadsheet } from "./Spreadsheet"
+import { ISheet } from "../../0-model/0-interfaces/ISheet"
+import { ISpreadsheet } from "../../0-model/0-interfaces/ISpreadsheet"
 
-/**
- * Sheet
- * Wraps the GoogleAppsScript.Spreadsheet.Sheet class
- * @property {GoogleAppsScript.Spreadsheet.Sheet} sheet
- * @method {void} add
- * @method {void} updateRow
- * @method {number} findRowIndexByUUID
- * @method {any[]} findRowsByValue
- */
-export class Sheet {
+export class Sheet implements ISheet {
   private sheet: GoogleAppsScript.Spreadsheet.Sheet
 
-  constructor(spreadSheet: Spreadsheet, sheetName: string) {
+  constructor(spreadSheet: ISpreadsheet, sheetName: string) {
     this.sheet = spreadSheet.getSheet(sheetName)
   }
 
@@ -29,11 +21,6 @@ export class Sheet {
     return this.sheet.getDataRange().getValues()
   }
 
-  /**
-   * The first column of the sheet must be the UUID
-   * @param id
-   * @returns the index of the row
-   */
   findRowIndexByUUID(id: string) {
     const values = this.sheet.getDataRange().getValues()
 

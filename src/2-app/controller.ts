@@ -1,6 +1,6 @@
 // TODO: hash the data in transfer
 
-import { Spreadsheet } from "../0-model/0-database/Spreadsheet"
+import { Spreadsheet } from "./Spreadsheet"
 import { MedicalHistory } from "../0-model/1-mappers/MedicalHistoryMapper"
 import { PatientData } from "../0-model/1-mappers/PatientDataMapper"
 import { Bootstrap } from "./Bootstrap"

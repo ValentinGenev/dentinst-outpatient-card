@@ -1,14 +1,14 @@
-import { Sheet } from "../0-database/Sheet"
-import { Mapper } from "../1-mappers/IMapper"
+import { ISheet } from "../0-interfaces/ISheet"
+import { IMapper } from "../0-interfaces/IMapper"
 import { PatientData } from "../1-mappers/PatientDataMapper"
 import { Patient } from "../1-mappers/PatientMapper"
-import { Repository } from "./IRepository"
+import { Repository } from "../0-interfaces/IRepository"
 
 export class PatientsRepository implements Repository {
-  private sheet: Sheet
-  private mapper: Mapper
+  private sheet: ISheet
+  private mapper: IMapper
 
-  constructor(sheet: Sheet, mapper: Mapper) {
+  constructor(sheet: ISheet, mapper: IMapper) {
     this.sheet = sheet
     this.mapper = mapper
   }

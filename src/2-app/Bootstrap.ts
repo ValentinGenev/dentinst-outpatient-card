@@ -1,13 +1,13 @@
-import { Sheet } from "../0-model/0-database/Sheet"
-import { Spreadsheet } from "../0-model/0-database/Spreadsheet"
+import { Sheet } from "./0-database/Sheet"
+import { Spreadsheet } from "./Spreadsheet"
 import { MedicalHistoryMapper } from "../0-model/1-mappers/MedicalHistoryMapper"
 import { PatientDataMapper } from "../0-model/1-mappers/PatientDataMapper"
 import { PatientMapper } from "../0-model/1-mappers/PatientMapper"
 import { MedicalHistoryRepository } from "../0-model/2-repositories/MedicalHistoryRepository"
 import { PatientsDataRepository } from "../0-model/2-repositories/PatientsDataRepository"
 import { PatientsRepository } from "../0-model/2-repositories/PatientsRepository"
-import { MedicalHistoryService } from "./0-services/MedicalHistoryService"
-import { PatientsService } from "./0-services/PatientsService"
+import { MedicalHistoryService } from "../0-model/3-services/MedicalHistoryService"
+import { PatientsService } from "../0-model/3-services/PatientsService"
 
 export class Bootstrap {
   private spreadsheet

@@ -1,15 +1,15 @@
-import { Mapper } from "../../0-model/1-mappers/IMapper"
+import { IMapper } from "../0-interfaces/IMapper"
 import { PatientData } from "../../0-model/1-mappers/PatientDataMapper"
 import { Patient } from "../../0-model/1-mappers/PatientMapper"
-import { Repository } from "../../0-model/2-repositories/IRepository"
+import { Repository } from "../0-interfaces/IRepository"
 
 export class PatientsService {
   private patientsRepository: Repository
   private dataRepository: Repository
-  private dataMapper: Mapper
+  private dataMapper: IMapper
 
   constructor(patientsRepository: Repository,
-      dataRepository: Repository, dataMapper: Mapper) {
+      dataRepository: Repository, dataMapper: IMapper) {
     this.patientsRepository = patientsRepository
     this.dataRepository = dataRepository
     this.dataMapper = dataMapper
