@@ -1,10 +1,10 @@
-import { ISheet } from "../../0-model/0-interfaces/ISheet"
-import { ISpreadsheet } from "../../0-model/0-interfaces/ISpreadsheet"
+import { Sheet as ISheet } from "../../0-model/0-interfaces/Sheet"
+import { Spreadsheet } from "../../0-model/0-interfaces/Spreadsheet"
 
 export class Sheet implements ISheet {
   private sheet: GoogleAppsScript.Spreadsheet.Sheet
 
-  constructor(spreadSheet: ISpreadsheet, sheetName: string) {
+  constructor(spreadSheet: Spreadsheet, sheetName: string) {
     this.sheet = spreadSheet.getSheet(sheetName)
   }
 

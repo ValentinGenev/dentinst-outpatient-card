@@ -4,6 +4,6 @@
  * @property {GoogleAppsScript.Spreadsheet.Spreadsheet} spreadsheet
  * @method {GoogleAppsScript.Spreadsheet.Sheet} getSheet
  */
-export interface ISpreadsheet {
+export interface Spreadsheet {
   getSheet(sheetId: string): GoogleAppsScript.Spreadsheet.Sheet;
 }

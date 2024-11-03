@@ -1,4 +1,4 @@
-import { IMapper } from "../0-interfaces/IMapper"
+import { Mapper } from "../0-interfaces/Mapper"
 
 enum PatientColumns {
   name = 0,
@@ -11,7 +11,7 @@ export interface Patient {
   familyName: string
 }
 
-export class PatientMapper implements IMapper {
+export class PatientMapper implements Mapper {
   mapDtoToSheetData(id: string, data: Patient) {
     const patient: any[] = []
     patient[PatientColumns.id] = id

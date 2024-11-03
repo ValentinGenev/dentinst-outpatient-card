@@ -1,4 +1,4 @@
-export interface ISheet {
+export interface Sheet {
   add(data: any[]): void
   updateRow(index: number, data: any[]): void
   /**

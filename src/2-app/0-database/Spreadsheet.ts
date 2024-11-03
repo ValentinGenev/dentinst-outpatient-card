@@ -1,4 +1,4 @@
-import { ISpreadsheet } from "../../0-model/0-interfaces/ISpreadsheet"
+import { Spreadsheet as ISpreadsheet } from "../../0-model/0-interfaces/Spreadsheet"
 
 export class Spreadsheet implements ISpreadsheet {
   private properties: GoogleAppsScript.Properties.Properties
